@@ -1,4 +1,5 @@
 node_modules/
 out/
-object/*.html
 motion/motion.html
+object/test*.html
+object/figure*.html
