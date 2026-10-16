@@ -112,7 +112,7 @@ footer{font-size:12.5px;color:var(--ink-2);border-top:1px solid var(--rule);padd
 .ar-stage g[data-name]{transition:opacity .18s}
 .ar-stage.dimmed g[data-name]:not(.hl){opacity:.16}
 .ar-stage g[data-name].sel-on{filter:drop-shadow(0 0 3px var(--accent))}
-body[data-theme="dark"] .ov .ov-label{fill:#e2ded5}
+body[data-theme="dark"] .ov .ov-label{fill:#e2ded5;stroke:#1b1d21}
 body[data-theme="dark"] .ov .ov-lead{stroke:rgba(230,224,210,.5)}
 body[data-theme="dark"] .ov .ov-dot{fill:#e2ded5}
 @media (prefers-reduced-motion:reduce){.ar-stage g[data-name]{transition:none}}
@@ -138,7 +138,7 @@ ${FLOW_CSS}</style>
     <div class="card">
       <h2>Assembly</h2>
       <div class="slider"><span>Assembled</span><input type="range" id="apart" min="0" max="100" value="0" aria-label="Explode the assembly"><span id="apart-v">0%</span></div>
-      <div class="row"><button type="button" id="b-assembled" aria-pressed="true">Assembled</button><button type="button" id="b-exploded" aria-pressed="false">Exploded</button><button type="button" id="b-labels" aria-pressed="false">Leader labels</button><button type="button" id="b-reset">Reset view</button></div>
+      <div class="row"><button type="button" id="b-assembled" aria-pressed="true">Assembled</button><button type="button" id="b-exploded" aria-pressed="false">Exploded</button><button type="button" id="b-labels" aria-pressed="false" title="On narrow screens the labels show the assembly letters A–H">Leader labels</button><button type="button" id="b-reset">Reset view</button></div>
     </div>
     <div class="card">
       <h2>Mechanisms</h2>

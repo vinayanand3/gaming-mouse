@@ -395,7 +395,7 @@ export function buildObject(T, { layer }) {
     const len = Math.hypot(w.P1[0] - w.P0[0], w.P1[1] - w.P0[1]);
     const o = [w.mid[0] + w.n[0] * 0.02, w.mid[1] + w.n[1] * 0.02, (Z.base1 + Z.wallF) / 2];
     let d = "";
-    for (let z = -4; z <= 5; z += 1.6) d += `M${(-len / 2 + 2).toFixed(2)} ${z.toFixed(2)}H${(len / 2 - 2).toFixed(2)}`;
+    for (let z = -4; z <= 5; z += 1.6) d += `M${(-len / 2).toFixed(3)} ${z.toFixed(2)}H${(len / 2).toFixed(3)}`;
     plane(w.part, o, t, [0, 0, -1], line(d, "faint"), w.n, [0.04, 0.4]);
   }
   // USB-C port opening on the two nose facets

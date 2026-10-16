@@ -111,8 +111,8 @@ export const FLOW_CSS = `
 .ov .ov-beam-cut{fill:none;stroke:#e5484d;stroke-width:2.2;stroke-linecap:round}
 .ov .ov-link{fill:none;stroke:#13b6d6;stroke-width:1.5;stroke-dasharray:2 7;stroke-linecap:round}
 .ov .ov-arc{fill:none;stroke:#13b6d6;stroke-width:1.3}
-.ov .ov-lead{fill:none;stroke:rgba(40,36,30,.55);stroke-width:.8}
+.ov .ov-lead{fill:none;stroke:rgba(40,36,30,.62);stroke-width:.9}
 .ov .ov-dot{fill:#1b1a18}
-.ov .ov-label{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;fill:rgba(28,26,22,.86);letter-spacing:.06em}
+.ov .ov-label{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;fill:#1c1a16;letter-spacing:.04em;font-weight:500;paint-order:stroke;stroke:#f3eee4;stroke-width:4px;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .ov .ov-tag{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;fill:#0f8fab;letter-spacing:.14em;font-weight:600}
 `;

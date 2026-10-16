@@ -1,7 +1,5 @@
 # Inside a wireless gaming mouse
 
-**Live:** [interactive anatomy (light)](https://vinayanand3.github.io/gaming-mouse/) · [dark](https://vinayanand3.github.io/gaming-mouse/gaming-mouse-anatomy.html) · [reveal film (MP4)](https://vinayanand3.github.io/gaming-mouse/gaming-mouse-reveal.mp4)
-
 A conceptual 125 × 65 × 40 mm wireless gaming mouse built part by part with the Anatomy Reveal skill (MIT kit): 136 convex solids, 44 explode assemblies, one model that drives both
 
 - `gaming-mouse-anatomy.html` / `gaming-mouse-anatomy-light.html`, the interactive dissection page (dark and light), and
@@ -41,11 +39,7 @@ Set `CHROME_PATH` if Chrome/Chromium isn't found.
 
 ## Publishing on GitHub Pages
 
-The repo root is the site: `index.html` (light page), `gaming-mouse-anatomy.html` (dark), `gaming-mouse-anatomy-light.html` and `gaming-mouse-reveal.mp4`, with `.nojekyll`. Pages serves the `main` branch from `/`. After `npm run figure`, copy `object/figure-light.html` to `index.html` and `gaming-mouse-anatomy-light.html`, and `object/figure.html` to `gaming-mouse-anatomy.html`. The pages load fonts from Google Fonts and nothing else.
-
-## Credits
-
-Built with the [Anatomy Reveal skill](https://github.com/annnguyentt/anatomy-reveal-skill) and its Anatomy kit (MIT, see `LICENSE.anatomy-reveal-kit` and `kit/LICENSE`).
+`site/` holds the two pages ready to serve; `site/index.html` is the light page. Push `site/` (or its contents) to a repo and enable Pages on that folder. The pages load fonts from Google Fonts and nothing else.
 
 ## Docs
 

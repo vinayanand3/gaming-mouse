@@ -21,7 +21,7 @@ const ovAt = (p, owner, values) => {
   return [p[0] + o[0], p[1] + o[1], p[2] + o[2]];
 };
 const f2 = (v) => v.toFixed(2);
-function drawOverlay(svg, s, values, project, ppu, t) {
+function drawOverlay(svg, s, values, project, ppu, t, opt = {}) {
   let html = "";
   const P = (p, owner) => project(ovAt(p, owner, values));
   const fs = (px) => f2(px / ppu);
@@ -98,14 +98,51 @@ function drawOverlay(svg, s, values, project, ppu, t) {
     html += `<text class="ov-tag" font-size="${fs(11)}" x="${f2(cx)}" y="${f2(cy - 10 / ppu)}" text-anchor="middle">2.4 GHz LINK · POLLING 1 / 4 / 8 kHz (DESIGN OPTIONS)</text>`;
     html += `</g>`;
   }
-  if (s.labels > 0.01) {
+  if (s.labels > 0.01 && opt.frame) {
+    // Callout layout: two columns beside the model, each label kept on its own line (min gap),
+    // elbow leaders from the part to the column, text on a paper halo so it reads over parts.
+    const F = opt.frame;
+    const B = opt.box ?? F;
+    const size = 11;
+    const gap = (opt.compact ? 20 : 25) / ppu;
+    const textW = (t) => (t.length * size * 0.61 + 8) / ppu;
+    const items = OVERLAY.labels.map((l) => ({ ...l, text: opt.compact ? l.text.split(" · ")[0] : l.text, at: P(l.p, l.owner) }));
+    const cx = B.x + B.w / 2;
+    // sides: keep the authored side unless the part has crossed far to the other half of the model
+    for (const it of items) it.dir = Math.abs(it.at[0] - cx) > B.w * 0.18 ? Math.sign(it.at[0] - cx) || it.side : it.side;
+    const pad = 14 / ppu;
+    const top = F.y + 40 / ppu;
+    const bottom = F.y + F.h - 44 / ppu;
+    for (const dir of [-1, 1]) {
+      const col = items.filter((it) => it.dir === dir).sort((a, b) => a.at[1] - b.at[1]);
+      if (!col.length) continue;
+      const widest = Math.max(...col.map((it) => textW(it.text)));
+      let x = dir < 0 ? B.x - 34 / ppu : B.x + B.w + 34 / ppu;
+      x = dir < 0 ? Math.max(x, F.x + pad + widest) : Math.min(x, F.x + F.w - pad - widest);
+      // stack: start each label at its part's height, push down to keep the gap, then pull back up if it ran off
+      let y = -Infinity;
+      for (const it of col) {
+        y = Math.max(it.at[1], y + gap);
+        it.ly = y;
+      }
+      const over = col[col.length - 1].ly - bottom;
+      if (over > 0) for (const it of col) it.ly -= over;
+      for (let i = 1; i < col.length; i++) col[i].ly = Math.max(col[i].ly, col[i - 1].ly + gap);
+      if (col[0].ly < top) {
+        const d = top - col[0].ly;
+        for (const it of col) it.ly += d;
+      }
+      for (const it of col) it.lx = x;
+    }
     html += `<g style="opacity:${f2(s.labels)}">`;
-    for (const l of OVERLAY.labels) {
-      const p = P(l.p, l.owner);
-      const lx = p[0] + (l.side * 70) / ppu;
-      const ly = p[1] - 18 / ppu;
-      html += `<path class="ov-lead" d="M${f2(p[0])} ${f2(p[1])}L${f2(lx)} ${f2(ly)}H${f2(lx + (l.side * 14) / ppu)}"/><circle class="ov-dot" r="${fs(1.8)}" cx="${f2(p[0])}" cy="${f2(p[1])}"/>`;
-      html += `<text class="ov-label" font-size="${fs(10.5)}" x="${f2(lx + (l.side * 18) / ppu)}" y="${f2(ly + 3.6 / ppu)}" text-anchor="${l.side < 0 ? "end" : "start"}">${l.text}</text>`;
+    for (const it of items) {
+      const [px, py] = it.at;
+      const elbow = it.lx - (it.dir * 16) / ppu;
+      html += `<path class="ov-lead" d="M${f2(px)} ${f2(py)}L${f2(elbow)} ${f2(it.ly)}H${f2(it.lx - (it.dir * 3) / ppu)}"/><circle class="ov-dot" r="${fs(2.2)}" cx="${f2(px)}" cy="${f2(py)}"/>`;
+    }
+    for (const it of items) {
+      const tx = it.lx + (it.dir * 3) / ppu;
+      html += `<text class="ov-label" font-size="${fs(size)}" x="${f2(tx)}" y="${f2(it.ly + (size * 0.36) / ppu)}" text-anchor="${it.dir < 0 ? "end" : "start"}">${it.text}</text>`;
     }
     html += `</g>`;
   }

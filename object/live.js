@@ -46,6 +46,8 @@ function frameView(dt) {
       fy += (sb.y + sb.height / 2 - fy) * k;
     }
   }
+  // leave side room for the label columns while leader labels are on
+  fit *= 1 - (stage.clientWidth < 620 ? 0.18 : 0.36) * drawn.labels;
   const goal = { zoom: Math.min(2.4, fit) * drawn.zoom, cx: fx, cy: fy, w: b.width, h: b.height, y1: b.y + b.height };
   for (const key in goal) view[key] = dt && view[key] !== undefined ? follow(view[key], goal[key], dt, 0.22) : goal[key];
   const w = VB[2] / view.zoom;
@@ -67,7 +69,10 @@ function paint(dt = 0) {
   const w = frameView(dt) ?? VB[2];
   for (const key of ["sig", "pow", "chg", "rgb"]) stage.style.setProperty("--" + key, drawn[key].toFixed(3));
   stage.style.setProperty("--flow-t", clock.toFixed(3));
-  drawOverlay(ovSvg, drawn, values, (p) => screenOf(about(M, p)), stage.clientWidth / w, clock);
+  const vb = svgs[0].getAttribute("viewBox").split(" ").map(Number);
+  const ovOpt = { frame: { x: vb[0], y: vb[1], w: vb[2], h: vb[3] }, compact: stage.clientWidth < 620 };
+  if (drawn.labels > 0.01) { const b = live.getBBox(); if (b.width) ovOpt.box = { x: b.x, y: b.y, w: b.width, h: b.height }; }
+  drawOverlay(ovSvg, drawn, values, (p) => screenOf(about(M, p)), stage.clientWidth / w, clock, ovOpt);
   const yaw = (((drawn.yaw % 360) + 360) % 360).toFixed(0);
   const text = `${drawn.apart > 0.02 ? `apart ${Math.round(drawn.apart * 100)}%` : "assembled"} · yaw ${yaw}° · pitch ${drawn.pitch.toFixed(0)}° · zoom ${drawn.zoom.toFixed(1)}×`;
   if (readout.textContent !== text) readout.textContent = text;

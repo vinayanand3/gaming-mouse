@@ -119,7 +119,9 @@ function applyState(s) {
   const stats = ctl.set({ root: { R: view.M }, ...values });
   for (const key of ["sig", "pow", "chg", "rgb"]) root.style.setProperty("--" + key, s[key].toFixed(3));
   root.style.setProperty("--flow-t", (s.t ?? 0).toFixed(3));
-  drawOverlay(ovSvg, s, values, (p) => screenOf(about(view.M, p)), DATA.W / view.w, s.t ?? 0);
+  const ovOpt = { frame: { x: view.x, y: view.y, w: view.w, h: view.h } };
+  if (s.labels > 0.01) { const b = svgs[1].getBBox(); if (b.width) ovOpt.box = { x: b.x, y: b.y, w: b.width, h: b.height }; }
+  drawOverlay(ovSvg, s, values, (p) => screenOf(about(view.M, p)), DATA.W / view.w, s.t ?? 0, ovOpt);
   s.titles.forEach((o, i) => { const v = o.toFixed(3); if (titleEls[i].style.opacity !== v) titleEls[i].style.opacity = v; });
   const vb = view.x.toFixed(3) + " " + view.y.toFixed(3) + " " + view.w.toFixed(3) + " " + view.h.toFixed(3);
   for (const svg of svgs) svg.setAttribute("viewBox", vb);
