@@ -1,0 +1,19 @@
+{
+  "name": "wireless-gaming-mouse-anatomy",
+  "private": true,
+  "description": "A conceptual wireless gaming mouse built as an Anatomy Reveal figure: interactive dissection page and a 30 s 16:9 reveal film.",
+  "scripts": {
+    "test-page": "node object/test-page.mjs --light",
+    "figure": "node object/build.mjs && node object/build.mjs --light",
+    "film": "node motion/build.mjs --ratio 16:9",
+    "paper": "node motion/paper.mjs && node motion/build.mjs --ratio 16:9",
+    "check": "node object/scan-apart.mjs -35 25 && node object/scan-apart.mjs 0 5 && node object/scan-apart.mjs 140 20 && node object/scan-apart.mjs 90 -20 && node object/scan-apart.mjs -20 70 && node motion/scan.mjs",
+    "render": "node motion/render.mjs blur out/blur --step 4 --most 40 --fmt jpeg",
+    "encode": "MAGICK=convert node motion/encode.mjs out/blur out/gaming-mouse-reveal.mp4",
+    "inventory": "node scripts/inventory.mjs",
+    "shape": "node object/shape.mjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "^23.0.0"
+  }
+}

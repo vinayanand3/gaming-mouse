@@ -1,0 +1,5 @@
+node_modules/
+out/
+motion/motion.html
+object/test*.html
+object/figure*.html
