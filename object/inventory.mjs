@@ -30,7 +30,7 @@ export const RULES = [
   R(/^base\.snap\./, "A", "Snap hook", "Glass-filled PC", "Locates the flank walls at the nose."),
   R(/^base\.boss\./, "A", "Shell screw boss", "Glass-filled PC", "Post from the base to the palm's underside; receives a shell screw."),
   R(/^base\.standoff\./, "E", "PCB standoff", "Glass-filled PC", "Holds the main board 1 mm above the base."),
-  R(/^foot\./, "H", "PTFE glide foot", "Virgin PTFE, 0.8 mm, adhesive-backed", "Low-friction skate; sets glide feel and the sensor's height above the surface."),
+  R(/^foot\./, "H", "PTFE glide foot", "Virgin PTFE, 1.0 mm, adhesive-backed", "Low-friction skate; sets glide feel and the sensor's height above the surface."),
   R(/^screw\./, "H", "Shell screw", "Steel M1.6, zinc-plated", "Clamps the base to the top shell through the bosses."),
   R(/^lens$/, "D", "Optical lens", "Optical-grade PC", "Light pipe guides LED light to the surface; imaging lens focuses the lit texture onto the sensor."),
   R(/^lens\.dome$/, "D", "Imaging lens element", "Optical-grade PC", "Imaging surface of the lens, centred on the sensor array."),

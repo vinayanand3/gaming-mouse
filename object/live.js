@@ -84,11 +84,12 @@ let anim = null;
 function tick(now) {
   const dt = Math.min(0.05, last ? (now - last) / 1e3 : 0.016);
   last = now;
-  clock += dt;
+  // reduced motion: hold the overlays in one still pose (every ray lit, dashes parked) instead of running them
+  clock = still.matches ? 2.4 : clock + dt;
   if (anim) anim(dt);
   for (const key in target) drawn[key] = follow(drawn[key], target[key], dt, still.matches ? 0 : drag && (key === "yaw" || key === "pitch") ? 0.05 : EASE[key] ?? 0.25);
   paint(dt);
-  const flowing = drawn.sig + drawn.pow + drawn.chg + drawn.link + drawn.rays + drawn.beam > 0.02;
+  const flowing = !still.matches && drawn.sig + drawn.pow + drawn.chg + drawn.link + drawn.rays + drawn.beam > 0.02;
   const moving = flowing || anim || drag || Object.keys(target).some((key) => Math.abs(drawn[key] - target[key]) > 0.002);
   frame = moving ? requestAnimationFrame(tick) : 0;
   if (!frame) last = 0;
@@ -96,6 +97,7 @@ function tick(now) {
 const run = () => {
   if (!frame) frame = requestAnimationFrame(tick);
 };
+still.addEventListener("change", run);
 
 // ---- pointer: drag to turn, click to select, wheel / pinch to zoom
 const pointers = new Map();

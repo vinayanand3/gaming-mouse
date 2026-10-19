@@ -171,10 +171,10 @@ Materials and sizes are engineering assumptions (see `engineering-assumptions.md
 | Base stiffening rib | `base.rib.front` | Glass-filled PC | Stiffens the base and supports the board between standoffs. |
 | Base stiffening rib | `base.rib.spine.a` | Glass-filled PC | Stiffens the base and supports the board between standoffs. |
 | Base stiffening rib | `base.rib.spine.b` | Glass-filled PC | Stiffens the base and supports the board between standoffs. |
-| PTFE glide foot | `foot.front` | Virgin PTFE, 0.8 mm, adhesive-backed | Low-friction skate; sets glide feel and the sensor's height above the surface. |
-| PTFE glide foot | `foot.rear` | Virgin PTFE, 0.8 mm, adhesive-backed | Low-friction skate; sets glide feel and the sensor's height above the surface. |
-| PTFE glide foot | `foot.left` | Virgin PTFE, 0.8 mm, adhesive-backed | Low-friction skate; sets glide feel and the sensor's height above the surface. |
-| PTFE glide foot | `foot.right` | Virgin PTFE, 0.8 mm, adhesive-backed | Low-friction skate; sets glide feel and the sensor's height above the surface. |
+| PTFE glide foot | `foot.front` | Virgin PTFE, 1.0 mm, adhesive-backed | Low-friction skate; sets glide feel and the sensor's height above the surface. |
+| PTFE glide foot | `foot.rear` | Virgin PTFE, 1.0 mm, adhesive-backed | Low-friction skate; sets glide feel and the sensor's height above the surface. |
+| PTFE glide foot | `foot.left` | Virgin PTFE, 1.0 mm, adhesive-backed | Low-friction skate; sets glide feel and the sensor's height above the surface. |
+| PTFE glide foot | `foot.right` | Virgin PTFE, 1.0 mm, adhesive-backed | Low-friction skate; sets glide feel and the sensor's height above the surface. |
 | Shell screw | `screw.LF` | Steel M1.6, zinc-plated | Clamps the base to the top shell through the bosses. |
 | Shell screw | `screw.RF` | Steel M1.6, zinc-plated | Clamps the base to the top shell through the bosses. |
 | Shell screw | `screw.LR` | Steel M1.6, zinc-plated | Clamps the base to the top shell through the bosses. |

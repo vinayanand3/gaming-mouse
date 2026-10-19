@@ -616,7 +616,7 @@ export function buildObject(T, { layer }) {
   };
   const lbl = (s, size = 1.0, extra = "") => text(0, size * 0.36, s, size, { tone: "lo", family: MONO, style: `fill:#c9ccd0;${extra}` });
   chip("soc", [10, 16], [-23, -17], 6.5, { label: lbl("SoC", 1.3) + text(0, 1.8, "2.4G", 0.8, { family: MONO, style: "fill:#9aa0a6" }) + `<circle cx="-2.3" cy="-2.3" r=".35" style="fill:#9aa0a6"/>` });
-  chip("crystal", [13, 15.4], [-27.4, -25.4], 6.4, { material: "steel", label: lbl("32M", 0.55, "fill:#3a3f44") });
+  chip("crystal", [13.2, 15.2], [-27.2, -25.6], 6.4, { material: "steel", label: lbl("32M", 0.55, "fill:#3a3f44") });
   chip("flash", [12.5, 15.5], [-10.2, -7.8], 6.3, { label: lbl("NOR", 0.7) });
   chip("pmic", [-19, -15], [-9, -5], 6.4, { label: lbl("PMIC", 0.85) });
   chip("ldo.a", [-19, -17], [7.5, 9.5], 6.3, { label: lbl("1V8", 0.5) });
